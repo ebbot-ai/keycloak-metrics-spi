@@ -9,8 +9,8 @@ Two distinct providers are defined:
 * MetricsEventListener to record the internal Keycloak events
 * MetricsEndpoint to expose the data through a custom endpoint
 
-The endpoint lives under `<url>/auth/realms/<realm>/metrics`. It will return data for all realms, no matter which realm
-you use in the URL (you can just default to `/auth/realms/master/metrics`).
+The endpoint is available under `<base url>/realms/<realm>/metrics` (Quarkus) or `<base url>/auth/realms/<realm>/metrics` (Wildfly). 
+It will return data for all realms, no matter which realm you use in the URL.
 
 ## License 
 
@@ -127,6 +127,8 @@ the metrics endpoint of each node. To fix this, you can push your metrics to a P
 
 You can enable pushing to PushGateway by setting the environment variable ```PROMETHEUS_PUSHGATEWAY_ADDRESS``` in the keycloak
 instance. The format is host:port or ip:port of the Pushgateway.
+
+If you need basic authentication you must set `PROMETHEUS_PUSHGATEWAY_BASIC_AUTH_USERNAME` and `PROMETHEUS_PUSHGATEWAY_BASIC_AUTH_PASSWORD`.
 
 #### **Grouping instances**
 The default value for the grouping key "instance" is the IP. This can be changed setting the environment variable ```PROMETHEUS_GROUPING_KEY_INSTANCE```
@@ -430,4 +432,4 @@ To disable metrics being externally accessible to a cluster. Set the environment
 
 ## Grafana Dashboard
 
-You can use this dashboard or create yours https://grafana.com/dashboards/10441
+You can use this dashboard or create yours https://grafana.com/grafana/dashboards/10441-keycloak-metrics-dashboard/
